@@ -19,13 +19,13 @@ class human:
         Parameters
         ----------
         coord: tuple
-            (x,y) coordinates where to place the particle.
+            (x,y) coordinates where to place the human.
         """
         self.x = coord[0]
         self.y = coord[1]
 
     def move(self):
-        """Move the particle by randomly pushing it in both directions."""
+        """Move the human by randomly pushing it in both directions."""
         self.x += np.random.randint(low=-1, high=2)
         self.y += np.random.randint(low=-1, high=2)
 
@@ -45,13 +45,13 @@ class zombie:
         Parameters
         ----------
         coord: tuple
-            (x,y) coordinates where to place the particle.
+            (x,y) coordinates where to place the zombie.
         """
         self.x = coord[0]
         self.y = coord[1]
 
     def move(self):
-        """Move the particle by randomly pushing it in both directions."""
+        """Move the zombie by randomly pushing it in both directions."""
         self.x += np.random.randint(low=-1, high=2)
         self.y += np.random.randint(low=-1, high=2)
 
@@ -79,19 +79,19 @@ class alpacalypse:
         
 
     def move_entities(self):
-        """Runs the move method in each of the particle objects in 
+        """Runs the move method in each of the entity objects in 
         the list of self.all_entities list
         """
         for ip in self._all_entities:
             ip.move()
 
     def boundary_conditions(self):
-        """Makes sure that all of the particle objects are within
+        """Makes sure that all of the entity objects are within
         the boundaries of the universe. If a particle is found to 
         be outside of the universe, it is re-indexed to a position
         inside the universe
         """
-        for ip in self._entities:
+        for ip in self._all_entities:
             if ip.x > self.width:
                 ip.x -= self.width
 
@@ -105,21 +105,20 @@ class alpacalypse:
                 ip.y += self.height
 
     def draw(self):
-        """Plots the fermions (in the self.fermions list) as well as
-        the bosons (from self.bosons) onto the plot of the universe.
-        fermions are plotted as blue circles and bosons are plotted
-        as red stars.
+        """Plots the humans and zombies in the list onto the plot of the apocalypse.
+        zombies are plotted as green circles and humans are plotted
+        as blue stars.
         """
         for ip in self.zombies:
-            plt.scatter(ip.x, ip.y, marker="o", c = "b")
+            plt.scatter(ip.x, ip.y, marker="o", c = "g")
 
         for ip in self.humans:
-            plt.scatter(ip.x, ip.y, marker="*", c = "r")
+            plt.scatter(ip.x, ip.y, marker="*", c = "b")
 
     def check_interaction(self):
-        """Checks to see if there are any particle-antiparticle
-        collisions of fermions on the map. If there is a collision,
-        it creates a boson in the location of the collision
+        """Checks to see if there are any human-zombie interactions on the map.
+        If there are, converts the human into a zombie (we can add more complexity
+        to this later)
         """
 
         for ip1, p1 in enumerate(self.humans):
@@ -128,7 +127,7 @@ class alpacalypse:
 
                     self.humans.pop(ip1)
 
-                    self.zombies.append(zombie(name = "",charge=0.0, mass=0.0,spin=1.0) )
+                    self.zombies.append(zombie() )
                     self.zombies[-1].place_at(coord=(p1.x, p1.y))
 
                     continue
