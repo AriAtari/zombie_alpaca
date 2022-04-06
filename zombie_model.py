@@ -2,9 +2,11 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import random
 
 class human:
-    
+    # Base ability to kill zombie
+    ability_to_kill = 1
     x = None
     y = None
 
@@ -123,18 +125,25 @@ class alpacalypse:
         to this later)
         """
 
-        for ip1, p1 in enumerate(self.humans):
-            for ip2, p2 in enumerate(self.zombies[ip1:]):
+        for ip1 in range(len(self.humans)-1, -1, -1):
+            p1 = self.humans[ip1]
+            for ip2 in range(len(self.zombies)-1, -1, -1):
+                p2 = self.zombies[ip2]
                 if p1.x == p2.x and p1.y == p2.y:
-
-                    self.humans.pop(ip1)
-
-                    self.zombies.append(zombie() )
-                    self.zombies[-1].place_at(coord=(p1.x, p1.y))
-
+                    # Base ability with some randomness can kill zombie
+                    if (p1.ability_to_kill * random.uniform(0,1) > 0.5):
+                        # human killed zombie
+                        self.zombies.pop(ip2)
+                        # Base ability increased
+                        p1.ability_to_kill *= 1.01
+                    # zombie infected human
+                    else :
+                        self.humans.pop(ip1)
+                        self.zombies.append(zombie())
+                        self.zombies[-1].place_at(coord=(p1.x, p1.y))
                     continue
 
-            continue
+
 
         # update the list
         self._all_entities = [*self.humans, *self.zombies]
