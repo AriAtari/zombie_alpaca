@@ -38,8 +38,9 @@ class zombie:
     def __init__(self):
         
         # add any special attributes here
+        self.smell_human = False
         
-        self.name = None # only here so code doesn't return an error
+        self.human_loc = [0,0]
         
     def place_at(self, coord):
         """Place entity at coordinates (x,y).
@@ -54,8 +55,16 @@ class zombie:
 
     def move(self):
         """Move the zombie by randomly pushing it in both directions."""
-        self.x += np.random.randint(low=-1, high=2)
-        self.y += np.random.randint(low=-1, high=2)
+        
+        if self.smell_human == True:
+            
+            self.x += (self.human_loc[0]-self.x)/abs(self.human_loc[0]-self.x)*np.random.randint(low=0, high=2)
+            
+            self.y += (self.human_loc[0]-self.x)/abs(self.human_loc[0]-self.x)*np.random.randint(low=0, high=2)
+        
+        else:
+            self.x += np.random.randint(low=-1, high=2)
+            self.y += np.random.randint(low=-1, high=2)
 
 class alpacalypse:
     """alpacalipse class. There is nothing otherwise."""
