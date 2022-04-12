@@ -1,8 +1,7 @@
-"""Module of a zombie apocalypse."""
+"""Model of a zombie apocalypse."""
 
 import numpy as np
 import matplotlib.pyplot as plt
-import random
 
 class human:
     
@@ -15,11 +14,8 @@ class human:
         
         self.name = None # only here so code doesn't return an error
         
-        self.chance_of_survival = 1 
-    
     def place_at(self, coord):
         """Place entity at coordinates (x,y).
-
         Parameters
         ----------
         coord: tuple
@@ -32,31 +28,6 @@ class human:
         """Move the human by randomly pushing it in both directions."""
         self.x += np.random.randint(low=-1, high=2)
         self.y += np.random.randint(low=-1, high=2)
-    
-    def gets_weapon(self,weapon):
-        """Give the human a weapon to improve chances of survival.
-        Weapon list:
-        Pistol: Increase chance of survival by 30 percent.
-        Rifle: Increase chance of survival by 40 percent.
-        Grenade: Increase chance of survival by 50 percent.
-        Rocket_launcher: Increase chance of survival by 80 percent.
-        * Capped at 90 percent.           
-        """
-        self.weapon=weapon
-        if self.Weapon == "Pistol":
-            self.survival_chance=self.survival_chance* 1.3
-        
-        elif self.Weapon == "Rifle":
-            self.chance_of_survival=self.chance_of_survival* 1.4 
-            
-        elif self.Weapon == "Grenade":
-            self.chance_of_survival=self.chance_of_survival* 1.5  
-       
-        elif self.Weapon == "Rocket_launcher":
-            self.chance_of_survival=self.chance_of_survival* 1.8  
-        
-        
-# -
 
 class zombie:
     
@@ -71,7 +42,6 @@ class zombie:
         
     def place_at(self, coord):
         """Place entity at coordinates (x,y).
-
         Parameters
         ----------
         coord: tuple
@@ -151,23 +121,18 @@ class alpacalypse:
         to this later)
         """
 
-        for ip1 in range(len(self.humans)-1, -1, -1):
-            p1 = self.humans[ip1]
-            for ip2 in range(len(self.zombies)-1, -1, -1):
-                p2 = self.zombies[ip2]
+        for ip1, p1 in enumerate(self.humans):
+            for ip2, p2 in enumerate(self.zombies[ip1:]):
                 if p1.x == p2.x and p1.y == p2.y:
-                    # Base ability with some randomness can kill zombie
-                    if (p1.chance_of_survival * random.uniform(0,1) > 0.5):
-                        # human killed zombie
-                        self.zombies.pop(ip2)
-                        # Base ability increased
-                        p1.chance_of_survival *= 1.01
-                    # zombie infected human
-                    else :
-                        self.humans.pop(ip1)
-                        self.zombies.append(zombie())
-                        self.zombies[-1].place_at(coord=(p1.x, p1.y))
+
+                    self.humans.pop(ip1)
+
+                    self.zombies.append(zombie() )
+                    self.zombies[-1].place_at(coord=(p1.x, p1.y))
+
                     continue
+
+            continue
 
         # update the list
         self._all_entities = [*self.humans, *self.zombies]
