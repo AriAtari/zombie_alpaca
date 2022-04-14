@@ -9,13 +9,13 @@ class human:
     x = None
     y = None
 
-    def __init__(self):
+    def __init__(self,base_chance_of_survival):
         
         # add any special attributes here
         
         self.name = None # only here so code doesn't return an error
         
-        self.chance_of_survival = 1 
+        self.chance_of_survival = base_chance_of_survival 
     
     def place_at(self, coord):
         """Place entity at coordinates (x,y).
@@ -54,19 +54,21 @@ class human:
        
         elif self.Weapon == "Rocket_launcher":
             self.chance_of_survival=self.chance_of_survival* 1.8  
-        
-        
-# -
+            
+            
 
 class zombie:
     
     x = None
     y = None
 
-    def __init__(self):
+    def __init__(self, smell_radius):
         
-        # add any special attributes here
+
         
+        self.smell_radius = smell_radius
+        
+        self.smallest_dist = np.inf
         self.smell_human = False
         self.human_loc = [0,0]
         
@@ -86,10 +88,12 @@ class zombie:
         
         if self.smell_human == True:
 
-            self.x += (self.human_loc[0]-self.x)/abs(self.human_loc[0]-self.x)*np.random.randint(low=0, high=2)
+            self.x += np.sign(self.human_loc[0]-self.x)*np.random.randint(low=0, high=2)
 
-            self.y += (self.human_loc[0]-self.x)/abs(self.human_loc[0]-self.x)*np.random.randint(low=0, high=2)
-
+            self.y += np.sign(self.human_loc[1]-self.y)*np.random.randint(low=0, high=2)
+            
+            self.smell_human = False
+            
         else:
             self.x += np.random.randint(low=-1, high=2)
             self.y += np.random.randint(low=-1, high=2)
@@ -159,7 +163,7 @@ class alpacalypse:
         If there are, converts the human into a zombie (we can add more complexity
         to this later)
         """
-
+        
         for ip1 in range(len(self.humans)-1, -1, -1):
             p1 = self.humans[ip1]
             for ip2 in range(len(self.zombies)-1, -1, -1):
@@ -171,17 +175,23 @@ class alpacalypse:
                         self.zombies.pop(ip2)
                         # Base ability increased
                         p1.chance_of_survival *= 1.01
+                        continue
                     # zombie infected human
                     else :
                         self.humans.pop(ip1)
-                        self.zombies.append(zombie())
+                        self.zombies.append(zombie(p2.smell_radius))
                         self.zombies[-1].place_at(coord=(p1.x, p1.y))
+                        continue
                         
-                if np.sqrt((p1.x-p2.x)**2 + (p1.y-p2.y)**2) <= p2.smell_radius:
-                    p2.smell_human = True
-                    p2.human_loc[0] = p1.x
-                    p2.human_loc[1] = p1.y
-                    
+                dist = np.sqrt((p1.x-p2.x)**2 + (p1.y-p2.y)**2)     
+                if dist <= p2.smell_radius:
+                    if dist < p2.smallest_dist:
+                        p2.smallest_dist = dist
+                        p2.human_loc[0] = p1.x
+                        p2.human_loc[1] = p1.y
+                        p2.smell_human = True
+                        continue
+                        
                     continue
 
         # update the list
