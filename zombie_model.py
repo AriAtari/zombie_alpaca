@@ -160,8 +160,10 @@ class alpacalypse:
         as purple plus signs.
         """
         
+        # adds 'zombie' label to legend
         plt.scatter(self.zombies[0].x, self.zombies[0].y, marker="o", c = "g", label = "zombie")
         
+        # adds 'human' label to legend
         plt.scatter(self.humans[0].x, self.humans[0].y, marker="P", c = "purple",label = "human")
         
         for ip in self.zombies:
