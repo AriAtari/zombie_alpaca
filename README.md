@@ -25,7 +25,7 @@ To give a human a weapon you only need to say
 ```
 human.gets_weapon(weapon)   
 ```
-where you have the choices of Pistol, Rifle, Grenade, and Rocket launcher!!
+where weapon can be Pistol, Rifle, Grenade, and Rocket launcher!! The input should be as a string.
 ```
 - Pistol: Increase chance of survival by 30 percent.
 - Rifle: Increase chance of survival by 40 percent.
