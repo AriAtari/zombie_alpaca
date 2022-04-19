@@ -157,14 +157,21 @@ class alpacalypse:
     def draw(self):
         """Plots the humans and zombies in the list onto the plot of the apocalypse.
         zombies are plotted as green circles and humans are plotted
-        as blue stars.
+        as purple plus signs.
         """
+        
+        plt.scatter(self.zombies[0].x, self.zombies[0].y, marker="o", c = "g", label = "zombie")
+        
+        plt.scatter(self.humans[0].x, self.humans[0].y, marker="P", c = "purple",label = "human")
+        
         for ip in self.zombies:
             plt.scatter(ip.x, ip.y, marker="o", c = "g")
 
         for ip in self.humans:
-            plt.scatter(ip.x, ip.y, marker="*", c = "b")
-
+            plt.scatter(ip.x, ip.y, marker="P", c = "purple")
+            
+        plt.legend()
+        
     def check_interaction(self):
         """Checks to see if there are any human-zombie interactions on the map.
         If there are, converts the human into a zombie (we can add more complexity
