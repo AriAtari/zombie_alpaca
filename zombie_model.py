@@ -11,10 +11,6 @@ class human:
 
     def __init__(self,base_chance_of_survival):
         
-        # add any special attributes here
-        
-        self.name = None # only here so code doesn't return an error
-        
         self.chance_of_survival = base_chance_of_survival 
     
     def place_at(self, coord):
@@ -35,24 +31,30 @@ class human:
     
     def gets_weapon(self,weapon):
         """Give the human a weapon to improve chances of survival.
-        Weapon list:
-        Pistol: Increase chance of survival by 30 percent.
-        Rifle: Increase chance of survival by 40 percent.
-        Grenade: Increase chance of survival by 50 percent.
-        Rocket_launcher: Increase chance of survival by 80 percent.
-        * Capped at 90 percent.           
+        
+        Parameters
+        ----------
+        weapon: string
+            Choose one of the following to provide human with an 
+            increased chance of survival:
+            
+            "pistol": Increase chance of survival by 30 percent.
+            "rifle": Increase chance of survival by 40 percent.
+            "grenade": Increase chance of survival by 50 percent.
+            "rocket launcher": Increase chance of survival by 80 percent.
+        
         """
         self.weapon=weapon
-        if self.Weapon == "Pistol":
-            self.survival_chance=self.survival_chance* 1.3
+        if self.weapon == "pistol":
+            self.chance_of_survival=self.chance_of_survival* 1.3
         
-        elif self.Weapon == "Rifle":
+        elif self.weapon == "rifle":
             self.chance_of_survival=self.chance_of_survival* 1.4 
             
-        elif self.Weapon == "Grenade":
+        elif self.weapon == "grenade":
             self.chance_of_survival=self.chance_of_survival* 1.5  
        
-        elif self.Weapon == "Rocket_launcher":
+        elif self.weapon == "rocket launcher":
             self.chance_of_survival=self.chance_of_survival* 1.8  
             
             
@@ -63,8 +65,6 @@ class zombie:
     y = None
 
     def __init__(self, smell_radius):
-        
-
         
         self.smell_radius = smell_radius
         
@@ -99,7 +99,7 @@ class zombie:
             self.y += np.random.randint(low=-1, high=2)
             
 class alpacalypse:
-    """alpacalypse class. There is nothing otherwise."""
+    """alpacalypse class. Let chaos ensue."""
     _all_entities = None
 
     def __init__(self, width, height):
@@ -110,7 +110,12 @@ class alpacalypse:
         # Create empty lists for the humans and zombies.
         self.zombies = []
         self.humans = []
-
+        
+        # Create empty lists for the total number of humans and zombies at 
+        # the end of each iteration
+        self.human_count = []
+        self.zombie_count = []
+        
     def evolve(self):
         
         self.move_entities()
@@ -119,7 +124,9 @@ class alpacalypse:
         
         self.check_interaction()
         
+        self.human_count.append(len(self.humans))
         
+        self.zombie_count.append(len(self.zombies))
 
     def move_entities(self):
         """Runs the move method in each of the entity objects in 
