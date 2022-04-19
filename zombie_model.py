@@ -99,7 +99,7 @@ class zombie:
             self.y += np.random.randint(low=-1, high=2)
             
 class alpacalypse:
-    """alpacalipse class. There is nothing otherwise."""
+    """alpacalypse class. There is nothing otherwise."""
     _all_entities = None
 
     def __init__(self, width, height):
