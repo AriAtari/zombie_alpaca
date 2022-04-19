@@ -52,6 +52,17 @@ class zombie:
         """
         self.x = coord[0]
         self.y = coord[1]
+        
+    def find_humans(self, radius):
+        """Look for nearby zombies to try to move in their direction instead of randomly.
+        
+        Parameters
+        ----------
+        radius: int or float
+            radius around the zombie with which it would have the capacity to smell a human
+        """
+        
+        
 
     def move(self):
         """Move the zombie by randomly pushing it in both directions."""
