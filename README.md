@@ -8,17 +8,17 @@ In this project, we simulate the fallout of a zombie alpacalypse in which we see
 
 After creating this basic simulation, we then went on to add a number of different behaviors exhibited by both the humans and zombies to increase the complexity of our model. Some of these behaviors include: Giving the zombie alpacas the ability to 'smell' humans that are within a certain distance of them, the ability for humans to fight back against the zombies and grow stronger from each zombie they succesfuly kill, and the ability for humans to pick up weapons to further increase their likely hood of sucessfully killing a zombie.
 
-## Basic Simulation
+## Basic Simulation - Elias Taira
 To run the basic simulation
 
 ## Adding Behaviors
 
-### Zombie's ability to smell
+### Zombie's ability to smell - Caroline VanDenBrouck
 
-### Human's ability to fight back and become stronger
+### Human's ability to fight back and become stronger - Xiaoyanbin Cai
 
 
-### Providing the humans with weaponry
+### Providing the humans with weaponry - Arian Andalib
 
 Every zombie alpacalypse needs weapons and so let there be weapons! 
 To give a human a weapon you only need to say 
@@ -33,3 +33,4 @@ Where 'weapon' can be Pistol, Rifle, Grenade, and Rocket launcher!! The input sh
 - Rocket launcher: Increase chance of survival by 80 percent.
 
 ```
+### Plotting - Noah De Guzman
