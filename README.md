@@ -17,5 +17,19 @@ To run the basic simulation
 
 ### Human's ability to fight back and become stronger
 
+
 ### Providing the humans with weaponry
 
+Every zombie alpacalypse needs weapons and so let there be weapons! 
+To give a human a weapon you only need to say 
+```
+human.gets_weapon(weapon)   
+```
+where you have the choices of Pistol, Rifle, Grenade, and Rocket launcher!!
+```
+- Pistol: Increase chance of survival by 30 percent.
+- Rifle: Increase chance of survival by 40 percent.
+- Grenade: Increase chance of survival by 50 percent.
+- Rocket launcher: Increase chance of survival by 80 percent.
+
+```
