@@ -49,7 +49,7 @@ for hum in my_alpaca_base.humans:
 for zom in my_alpaca_base.zombies:
     zom.place_at([np.random.randint(low = 0, high = my_alpaca_base.width),np.random.randint(low = 0, high = my_alpaca_base.height)])
 ```
-Now, we run the ABM
+Now, we run the ABM. The only method we actually need to run for this is the '.evolve()' method, which basically moves the iteration forward by 1 timestep. To iterate over multiple timesteps, we run the '.evolve()' method a specified number of times via a 'for' loop. Should we want to make an animation of the state of the ABM after each timestep, we add in some code to plot out the map of humans and zombies contained within our 'alpacalypse' object after each timestep, which involves the use of the '.draw()' method to plot out the current position of each human and zombie on the map.
 ```
 # Initializes an image for which the animation will take place on
 # Comment out next line to allow model to run faster
