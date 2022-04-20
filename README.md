@@ -79,7 +79,7 @@ print("Total time =", end-start)  # Prints out how long the entire model took to
 ```
 If the animation code has not been commented out, the image should look something like this:
 
-
+<img src="https://github.com/tairaeli/cmse202_honors_project/blob/master/images/Galactic_centre_orbits.svg.png" width="400" height="500">
 
 To see the full animation, go to 'Zombie_alpaca.ipynb' to view it
 
