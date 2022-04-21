@@ -57,6 +57,9 @@ class human:
         elif self.weapon == "rocket launcher":
             self.chance_of_survival=self.chance_of_survival* 1.8  
             
+        elif self.weapon == "None":
+            self.chance_of_survival=self.chance_of_survival* 1
+
             
 
 class zombie:
@@ -97,7 +100,7 @@ class zombie:
         else:
             self.x += np.random.randint(low=-1, high=2)
             self.y += np.random.randint(low=-1, high=2)
-            
+
 class alpacalypse:
     """alpacalypse class. Let chaos ensue."""
     _all_entities = None
