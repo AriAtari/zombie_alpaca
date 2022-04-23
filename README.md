@@ -87,6 +87,58 @@ To see the full animation, go to 'Zombie_alpaca.ipynb' to view it
 
 ### Zombie's ability to smell - Caroline VanDenBrouck
 
+This attribute give the zombies the ability to find the humans nearest to them by smelling them. It fundamentaly allows zombies to "follow" humans, increasing there chances of running into humans faster which would results in the production of a higher zombie population overall.
+
+This attribute is set during the initiantion (smell_radius) of the zombie objects and can be set in the range from 0 to the length of the board (sent from everywhere). This attribute has no set default and must be specified at the time of intitation of the zombie object. An example of said initiation is shown below.
+
+```
+zom = zombie(smell_radius = 0)
+```
+
+The input needs to be either an int or a float. A string will not be accepted. 
+
+The scent radius is utilized within the check_iterations method of the apocalypse class which is used to run the full simulation.
+
+```
+    def check_interaction(self):
+        """Checks to see if there are any human-zombie interactions on the map.
+        If there are, converts the human into a zombie (we can add more complexity
+        to this later)
+        """
+        
+        for ip1 in range(len(self.humans)-1, -1, -1):
+            p1 = self.humans[ip1]
+            for ip2 in range(len(self.zombies)-1, -1, -1):
+                p2 = self.zombies[ip2]
+                if p1.x == p2.x and p1.y == p2.y:
+                    # Base ability with some randomness can kill zombie
+                    if (p1.chance_of_survival * random.uniform(0,1) > 0.5):
+                        # human killed zombie
+                        self.zombies.pop(ip2)
+                        # Base ability increased
+                        p1.chance_of_survival *= 1.01
+                        continue
+                    # zombie infected human
+                    else :
+                        self.humans.pop(ip1)
+                        self.zombies.append(zombie(p2.smell_radius))
+                        self.zombies[-1].place_at(coord=(p1.x, p1.y))
+                        continue
+                        
+                dist = np.sqrt((p1.x-p2.x)**2 + (p1.y-p2.y)**2)     
+                if dist <= p2.smell_radius:
+                    if dist < p2.smallest_dist:
+                        p2.smallest_dist = dist
+                        p2.human_loc[0] = p1.x
+                        p2.human_loc[1] = p1.y
+                        p2.smell_human = True
+                        continue
+                        
+                    continue
+```
+
+
+
 ### Human's ability to fight back and become stronger - Xiaoyanbin Cai
 
 
