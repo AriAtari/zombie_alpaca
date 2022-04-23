@@ -105,4 +105,63 @@ Where 'weapon' can be Pistol, Rifle, Grenade, and Rocket launcher!! The input sh
 - Rocket launcher: Increase chance of survival by 80 percent.
 
 ```
-### Plotting - Noah De Guzman
+### Plotting
+
+In addition to being able to plot the current positions of each of the humans an zombies, the 'alpacalypse()' class also has two other attribues, 'human_count' and 'zombie_count' that record the number of humans and zombies at the end of each iteration respectively. These attributes can be very helpful for performing various kinds of analysis on the model to be able to better understand the different behaviors of the humans and zombies as we iterate through the ABM.
+
+We will now show an example of one of the ways in which we create plots using the  'human_count' and 'zombie_count' attributes. The full list different visualizations we performed can be found on 'zombie_model_plot.ipynb'
+
+In the following cell, we analyze the base model (no smell radius, no ability to fight back against zombies) at various different proprtions to evaluate the number of humans being bit for each starting population
+```
+# Preping and running the alpacalypse.iterate() function much like the very first example
+
+import numpy as np
+import matplotlib.pyplot as plt
+import time
+from IPython.display import display, clear_output
+
+# Importing necessary classes to run simulation
+from zombie_model import human, zombie, alpacalypse 
+
+np.random.seed(123456789)
+
+hpops = [350,300,250,200,150,100,50]
+
+plt.figure(figsize = (15,10))
+
+for num in range(7): # running the simulation 7 different times to accound for the different 
+    
+    my_alpaca = alpacalypse(width = 200 , height = 200)
+    
+    for p in range(hpops[num]):
+        my_alpaca.humans.append(
+            human(base_chance_of_survival = 0)
+        )
+    for p in range(400-hpops[num]):
+        my_alpaca.zombies.append(
+            zombie(smell_radius = 0)
+        )
+
+    my_alpaca._all_entities = [*my_alpaca.humans, *my_alpaca.zombies]
+
+    for hum in my_alpaca.humans:
+        hum.place_at([np.random.randint(low = 0, high = my_alpaca.width),np.random.randint(low = 0, high = my_alpaca.height)])
+
+    for zom in my_alpaca.zombies:
+        zom.place_at([np.random.randint(low = 0, high = my_alpaca.width),np.random.randint(low = 0, high = my_alpaca.height)])
+    
+    for i in range(100):
+        my_alpaca.evolve()
+    
+   
+    humans_eaten = hpops[num] - np.array(my_alpaca.human_count) # calculating the total number of humans bitten after each iteration
+    
+    plt.plot(range(100),humans_eaten,label = "Human Pop = {}".format(hpops[num]))
+    plt.xlabel('Time')
+    plt.ylabel("Humans Eaten")
+    plt.legend()
+```
+The output should look something like this:
+![image](https://user-images.githubusercontent.com/86431659/164883117-c3783e75-744f-4b64-8a1d-cbaa3b9a11a2.png)
+
+
