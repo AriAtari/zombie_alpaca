@@ -162,6 +162,4 @@ for num in range(7): # running the simulation 7 different times to accound for t
     plt.legend()
 ```
 The output should look something like this:
-![image](https://user-images.githubusercontent.com/86431659/164883117-c3783e75-744f-4b64-8a1d-cbaa3b9a11a2.png)
-
-
+<img src="https://github.com/AriAtari/zombie_alpaca/blob/main/Images/plot_example.jpg" width="300" height="300">
