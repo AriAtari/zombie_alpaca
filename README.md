@@ -79,7 +79,7 @@ print("Total time =", end-start)  # Prints out how long the entire model took to
 ```
 If the animation code has not been commented out, the image should look something like this:
 
-<img src="https://github.com/AriAtari/zombie_alpaca/blob/main/Images/basic_sim_pic.jpg" width="300" height="300">
+<img src="https://github.com/AriAtari/zombie_alpaca/blob/main/Images/basic_sim_pic.jpg" width="400" height="400">
 
 To see the full animation, go to 'Zombie_alpaca.ipynb' to view it
 
@@ -163,4 +163,4 @@ for num in range(7): # running the simulation 7 different times to accound for t
 ```
 The output should look something like this:
 
-<img src="https://github.com/AriAtari/zombie_alpaca/blob/main/Images/plot_example.jpg" width="300" height="300">
+<img src="https://github.com/AriAtari/zombie_alpaca/blob/main/Images/plot_example.jpg" width="500" height="300">
