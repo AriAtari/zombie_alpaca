@@ -137,6 +137,28 @@ The scent radius is utilized within the check_iterations method of the apocalyps
                     continue
 ```
 
+The check_interactions method looks at the positions of all the humans relative to the zombies and checks to see if any humans would be turned into zombie. It also figures out whether that specific zombie would be moving in a certain direction (can smell a human in its radius) or at random.
+
+The distance between the humans and zombies is calculated using the distance formula. If that distance is less than or equal to the scent radius of the zombie and smaller than all previously calculated distances, then the position of the closest human will be stored as a value and smell_human will be set to True. This is necassary to using the humans position in the move method of the zombie class.
+
+```
+    def move(self):
+        """Move the zombie by randomly pushing it in both directions."""
+        
+        if self.smell_human == True:
+
+            self.x += np.sign(self.human_loc[0]-self.x)*np.random.randint(low=0, high=2)
+
+            self.y += np.sign(self.human_loc[1]-self.y)*np.random.randint(low=0, high=2)
+            
+            self.smell_human = False
+            
+        else:
+            self.x += np.random.randint(low=-1, high=2)
+            self.y += np.random.randint(low=-1, high=2)
+```
+
+The stored value of the human location is used to move the zombie in the direction of that location, if there is a specified human location wihtin the smell radius (smell_human needs to be True). Otherwise the zombie will move at random and the simulation will run through the step again after another interation. 
 
 
 ### Human's ability to fight back and become stronger - Xiaoyanbin Cai
