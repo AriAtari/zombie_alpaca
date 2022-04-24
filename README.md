@@ -164,6 +164,9 @@ The stored value of the human location is used to move the zombie in the directi
 ### Human's ability to fight back and become stronger - Xiaoyanbin Cai
 Now we would like to know how human's ability to fight back and become stronger. We have a for loop to have everyone meet with a zombie. Each people would have a origin base ability that can kill zombies. If a person have a random chance to kill zombies, then that people could increase base ability which means that person have the ability to fight back zombies and get stronger.
 
+When alpacalypse have different survival rate they will have different percentage of surviros at the end. It is visualized as following:
+
+<img src="https://github.com/AriAtari/zombie_alpaca/blob/main/Images/percentage_of_human_left.jpg" width="500" height="300">
 
 ### Providing the humans with weaponry - Arian Andalib
 
