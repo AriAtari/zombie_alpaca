@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import random
 
 class human:
-    
+    # Base ability to kill zombie
+    ability_to_kill = 1
     x = None
     y = None
 
@@ -189,7 +190,7 @@ class alpacalypse:
         a set radius of them, if there are, then the zombie records the human's
         location and prepared to move in the human's direction
         """
-        
+
         for ip1 in range(len(self.humans)-1, -1, -1):
             p1 = self.humans[ip1]
             for ip2 in range(len(self.zombies)-1, -1, -1):
