@@ -1,4 +1,4 @@
-"""Module of a zombie apocalypse."""
+"""Module of a zombie apocalypse adapted from StandardModel.py"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -110,7 +110,7 @@ class alpacalypse:
         self.width = width
         self.height = height
 
-        # Create empty lists for the humans and zombies.
+        # Create empty lists for the human and zombie objects.
         self.zombies = []
         self.humans = []
         
@@ -139,10 +139,10 @@ class alpacalypse:
             ip.move()
 
     def boundary_conditions(self):
-        """Makes sure that all of the entity objects are within
-        the boundaries of the universe. If a particle is found to 
-        be outside of the universe, it is re-indexed to a position
-        inside the universe
+        """Makes sure all the entities are within the bounds of the map
+        
+        If it is found that they are outside the map after moving, they
+        are sent back to being within the map boundaries
         """
         for ip in self._all_entities:
             if ip.x > self.width:
@@ -178,9 +178,16 @@ class alpacalypse:
         plt.legend()
         
     def check_interaction(self):
-        """Checks to see if there are any human-zombie interactions on the map.
-        If there are, converts the human into a zombie (we can add more complexity
-        to this later)
+        """Features several different behaviors in the humans and zombies:
+        
+        Ability to fight back - Checks if a human and zombie are on the same
+        location, then adds a random chance of the human either surviving and
+        becoming stronger, or dying and becoming a zombie. This is based off of 
+        the set chance of survival and a random value between 0 and 1
+        
+        Zombie Scent - Zombies check to see if there are any humans within
+        a set radius of them, if there are, then the zombie records the human's
+        location and prepared to move in the human's direction
         """
         
         for ip1 in range(len(self.humans)-1, -1, -1):
@@ -201,9 +208,10 @@ class alpacalypse:
                         self.zombies.append(zombie(p2.smell_radius))
                         self.zombies[-1].place_at(coord=(p1.x, p1.y))
                         continue
-                        
-                dist = np.sqrt((p1.x-p2.x)**2 + (p1.y-p2.y)**2)     
-                if dist <= p2.smell_radius:
+                
+                
+                dist = np.sqrt((p1.x-p2.x)**2 + (p1.y-p2.y)**2)  # tracks distance to all humans on the map
+                if dist <= p2.smell_radius: # if the human is within the scent radius then proceed
                     if dist < p2.smallest_dist:
                         p2.smallest_dist = dist
                         p2.human_loc[0] = p1.x
