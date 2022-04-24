@@ -107,7 +107,6 @@ The scent radius is utilized within the check_iterations method of the apocalyps
         """
         
         for ip1 in range(len(self.humans)-1, -1, -1):
-
             p1 = self.humans[ip1]
             for ip2 in range(len(self.zombies)-1, -1, -1):
                 p2 = self.zombies[ip2]
@@ -163,6 +162,8 @@ The stored value of the human location is used to move the zombie in the directi
 
 
 ### Human's ability to fight back and become stronger - Xiaoyanbin Cai
+Now we would like to know how human's ability to fight back and become stronger. We have a for loop to have everyone meet with a zombie. Each people would have a origin base ability that can kill zombies. If a person have a random chance to kill zombies, then that people could increase base ability which means that person have the ability to fight back zombies and get stronger.
+
 
 ### Providing the humans with weaponry - Arian Andalib
 
@@ -179,7 +180,6 @@ Where 'weapon' can be Pistol, Rifle, Grenade, and Rocket launcher!! The input sh
 - Rocket launcher: Increase chance of survival by 80 percent.
 
 ```
-
 ### Plotting
 
 In addition to being able to plot the current positions of each of the humans an zombies, the 'alpacalypse()' class also has two other attribues, 'human_count' and 'zombie_count' that record the number of humans and zombies at the end of each iteration respectively. These attributes can be very helpful for performing various kinds of analysis on the model to be able to better understand the different behaviors of the humans and zombies as we iterate through the ABM.
